@@ -1,0 +1,44 @@
+---
+services:
+  tg-spam:
+    image: ghcr.io/umputun/tg-spam:master
+    restart: always
+    container_name: tg-spam
+    logging: &default_logging
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+    environment:
+      - TZ=Europe/Amsterdam
+      - LOGGER_ENABLED=true
+      - LOGGER_FILE=/srv/log/tg-spam.log
+      - LOGGER_MAX_SIZE=5M
+      - FILES_SAMPLES=/srv/data/samples
+      - FILES_DYNAMIC=/srv/data/dynamic
+      - NO_SPAM_REPLY=true
+      - DEBUG=true
+    volumes:
+      - ./data:/srv/data
+      - ./log:/srv/log
+      - ./tg-spam-samples:/srv/data/samples
+      - ./tg-spam-dynamic:/srv/data/dynamic
+
+  tg-spam-updater:
+    image: ghcr.io/umputun/tg-spam-updater:latest
+    hostname: tg-spam-updater
+    container_name: tg-spam-updater
+    restart: always
+    logging: *default_logging
+    environment:
+      - TZ=Europe/Amsterdam
+    volumes:
+      - ./tg-spam-samples:/samples
+    command: ["https://github.com/radio-t/tg-spam-samples.git", "/samples"]
+
+  watchtower:
+    image: containrrr/watchtower
+    logging: *default_logging
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 30
