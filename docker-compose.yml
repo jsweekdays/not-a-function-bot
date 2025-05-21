@@ -21,6 +21,7 @@ services:
       - FILES_SAMPLES=/srv/data/samples
       - FILES_DYNAMIC=/srv/data/dynamic
       - NO_SPAM_REPLY=true
+      - SUPPRESS_JOIN_MESSAGE=true
       - DEBUG=true
     volumes:
       - ./data:/srv/data
