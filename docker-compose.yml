@@ -22,7 +22,7 @@ services:
       - FILES_DYNAMIC=/srv/data/dynamic
       - NO_SPAM_REPLY=true
       - SUPPRESS_JOIN_MESSAGE=true
-      - DEBUG=true
+      - DEBUG=false
     volumes:
       - ./log:/srv/log
       - ./tg-spam-samples:/srv/data/samples
