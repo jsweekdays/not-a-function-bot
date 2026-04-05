@@ -46,4 +46,4 @@ services:
     logging: *default_logging
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: --interval 30
+    command: --interval 300
