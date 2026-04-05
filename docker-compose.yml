@@ -24,7 +24,6 @@ services:
       - SUPPRESS_JOIN_MESSAGE=true
       - DEBUG=true
     volumes:
-      - ./data:/srv/data
       - ./log:/srv/log
       - ./tg-spam-samples:/srv/data/samples
       - ./tg-spam-dynamic:/srv/data/dynamic
