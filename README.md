@@ -35,13 +35,12 @@ The project uses Docker Compose with three services:
 
 1. `tg-spam`: Main spam detection service
 2. `tg-spam-updater`: Service that keeps spam samples up to date
-3. `watchtower`: Automatic container updates (checks every 30 seconds)
+3. `watchtower`: Automatic container updates (checks every 300 seconds)
 
 ### Volumes
 
 The following directories are used for persistent storage:
 
-- `./data`: General data directory
 - `./log`: Log files
 - `./tg-spam-samples`: Spam detection samples
 - `./tg-spam-dynamic`: Dynamic spam detection data
@@ -56,7 +55,7 @@ The following directories are used for persistent storage:
 
 2. Create necessary directories:
    ```bash
-   mkdir -p data log tg-spam-samples tg-spam-dynamic
+   mkdir -p log tg-spam-samples tg-spam-dynamic
    ```
 
 3. Set up your environment variables:
@@ -76,7 +75,7 @@ The following directories are used for persistent storage:
 
 - Logging enabled with JSON format
 - Max log size: 10MB with 5 rotations
-- Debug mode enabled
+- Debug mode disabled
 - No spam reply mode enabled
 
 ### tg-spam-updater Service
@@ -86,7 +85,7 @@ The following directories are used for persistent storage:
 
 ### Watchtower Service
 - Automatically updates containers
-- Checks for updates every 30 seconds
+- Checks for updates every 5 minutes
 
 ## Logs
 
